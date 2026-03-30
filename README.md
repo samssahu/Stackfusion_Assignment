@@ -3,29 +3,6 @@
 This document describes all bugs found and fixed across the three services:
 Django backend, Go backend, and Next.js frontend.
 
----
-
-## Summary
-
-| # | Service | File | Bug | Severity |
-|---|---------|------|-----|----------|
-| 1 | Django | `parking/views.py` | Available slots returned occupied slots instead of free ones | Critical |
-| 2 | Django | `parking/views.py` | Booking creation never marked slot as occupied | Critical |
-| 3 | Django | `parking/serializers.py` | `depth=1` broke POST — serializer rejected integer FK fields | Critical |
-| 4 | Django | `parking/serializers.py` | `start_time` required on POST but injected by view — failed validation | Critical |
-| 5 | Django | `parking/views.py` + `urls.py` | No vehicles endpoint — frontend had no way to list valid vehicles | Missing feature |
-| 6 | Django | `parking_project/settings.py` + `requirements.txt` | CORS not configured — browser blocked all frontend requests | Critical |
-| 7 | Go | `main.go` | Wrong JOIN column `s.slot_id` (should be `s.id`) — query returned nothing | Critical |
-| 8 | Go | `main.go` | Wrong WHERE clause `IS NOT NULL` — returned completed bookings as active | Critical |
-| 9 | Frontend | `lib/api.js` | Django port was `8001` instead of `8000` | Critical |
-| 10 | Frontend | `pages/index.js` | `fetchAvailableSlots()` called without `lotId` argument — URL was `/lots/undefined/slots/available/` | Critical |
-| 11 | Frontend | `pages/index.js` | No guard when no lot selected — could fire request with empty lot ID | Bug |
-| 12 | Frontend | `pages/index.js` | Stale closure on `loadSlots` — after booking, grid refreshed with wrong lot ID | Bug |
-| 13 | Frontend | `pages/index.js` | Vehicle input was free text — users could enter non-existent IDs causing 400 errors | Bug |
-| 14 | Frontend | `components/SlotGrid.js` | `fetchSlots()` never called after booking — grid stayed stale | Bug |
-| 15 | Frontend | `lib/api.js` | Error message was generic — real server error was hidden from user | UX |
-
----
 
 ## Bug Details & Fixes
 
